@@ -1,3 +1,4 @@
+;; Modified by Reed in 2017
 ;;
 ;; Emulate_Scrolling_Middle_Button.ahk
 ;; Author: Erik Elmore <erik@ironsavior.net>

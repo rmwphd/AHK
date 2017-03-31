@@ -9,8 +9,8 @@
  SetTimer, WatchPOV, 5
  SetTimer, WatchAxis2, 5
  SetTimer, WatchAxis3, 5
+ SetTimer, WatchLayer, 5
 return
-
 
 
 ;; DPad Stuff ~~~~~~~~~~~~~~~~
@@ -22,15 +22,15 @@ WatchPOV:
     if POV < 0   ; No angle to report
         KeyToHoldDown =
     else if POV > 31500                 ; 315 to 360 degrees: Forward
-        KeyToHoldDown = s           ; DPad Up
+        KeyToHoldDown = %DpU%           ; DPad Up
     else if POV between 0 and 4500      ; 0 to 45 degrees: Forward
-        KeyToHoldDown = s           ; DPad Up
+        KeyToHoldDown = %DpU%           ; DPad Up
     else if POV between 4501 and 13500  ; 45 to 135 degrees: Right
-        KeyToHoldDown = a           ; DPad Down
+        KeyToHoldDown = %DpR%           ; DPad Right
     else if POV between 13501 and 22500 ; 135 to 225 degrees: Down
-        KeyToHoldDown = h           ; DPad Right
+        KeyToHoldDown = %DpD%           ; DPad Down
     else                                ; 225 to 315 degrees: Left
-        KeyToHoldDown = t           ; DPad Left
+        KeyToHoldDown = %DpL%           ; DPad Left
 
     if KeyToHoldDown = %KeyToHoldDownPrev%  ; The correct key is already down (or no key is needed).
         return 
@@ -51,13 +51,13 @@ WatchAxis2:
     KeyToHoldDownPrev2 = %KeyToHoldDown2% 
 
     if JoyX > 70
-        KeyToHoldDown2 = c      ; LStick Right
+        KeyToHoldDown2 = %LSR%      ; LStick Right
     else if JoyX < 30
-        KeyToHoldDown2 = r      ; LStick Left
+        KeyToHoldDown2 = %LSL%      ; LStick Left
     else if JoyY > 70
-        KeyToHoldDown2 = d      ; LStick Down
+        KeyToHoldDown2 = %LSD%      ; LStick Down
     else if JoyY < 30
-        KeyToHoldDown2 = g      ; LStick Up
+        KeyToHoldDown2 = %LSU%      ; LStick Up
     else
         KeyToHoldDown2 =
 
@@ -79,13 +79,13 @@ WatchAxis3:
     KeyToHoldDownPrev3 = %KeyToHoldDown3%  
 
     if JoyZ > 70
-        KeyToHoldDown3 = p      ; RStick Right
+        KeyToHoldDown3 = %RSR%      ; RStick Right
     else if JoyZ < 30
-        KeyToHoldDown3 = m      ; RStick Left
+        KeyToHoldDown3 = %RSL%      ; RStick Left
     else if JoyR > 70
-        KeyToHoldDown3 = y      ; RStick Down
+        KeyToHoldDown3 = %RSD%      ; RStick Down
     else if JoyR < 30
-        KeyToHoldDown3 = u      ; RStick Up
+        KeyToHoldDown3 = %RSU%      ; RStick Up
     else
         KeyToHoldDown3 =
 
@@ -102,16 +102,16 @@ WatchAxis3:
 ;; Right-side face buttons ~~~~~~~~~~~~~~~~
 
 Joy1::              ; Square
-    Send e  ;; v
+    Send %Squ%
 return
 Joy2::              ; Ex
-    Send o  ;; j
+    Send %Exx%  ;; j
 return
 Joy3::              ; Circle
-    Send n  ;; l
+    Send %Cir%  ;; l
 return
 Joy4::              ; Triangle
-    Send i  ;; k
+    Send %Tri%  ;; k
 return 
 
 ;; Shoulders ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -119,7 +119,7 @@ return
 ; Joy5:: BackSpace
 Joy5::              ; L1
 Send {BackSpace down}   ; Press the button down.
-SetTimer, WaitForJoy5, 250  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
+SetTimer, WaitForJoy5, 150  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
 return
 
 WaitForJoy5:
@@ -137,10 +137,55 @@ Joy7::              ; L2
   KeyWait, Joy7
   Send {Shift Up}
 return
-Joy6:: Space        ; R1
+
+Joy6:: 
+    Send %R1%
+Return
 
 ;Joy8::             ; R2
+WatchLayer: ; causes a crazy error where it presses return???
+    if GetKeyState("Joy8")
+    {
+        DpU = b
+        DpD = w
+        DpL = f
+        DpR = x
+        RSU = q
+        RSD = z
+;        RSL = 
+;        RSR = 
+        LSU = Up
+        LSD = Down
+        LSL = Left
+        LSR = Right
+        Squ = v
+        Exx = j
+        Cir = l
+        Tri = k
+        R1 = .
+    }
+    else
+    {
+        DpU = s
+        DpD = h
+        DpL = t
+        DpR = a
+        RSU = u
+        RSD = y
+        RSL = m
+        RSR = p
+        LSU = g
+        LSD = d
+        LSL = r
+        LSR = c
+        Squ = e
+        Exx = o
+        Cir = n
+        Tri = i
+        R1 = {Space}
+    }
 
+Return
 
 ;; Rare face buttons ~~~~~~~~~~~~~~~~
 
@@ -163,3 +208,5 @@ return
 ; pad::
 ;     ;;Send something
 ; return
+
+

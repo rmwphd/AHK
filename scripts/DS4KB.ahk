@@ -1,9 +1,7 @@
-;; Just playing with AutoHotKey ideas for a controller keyboard
+;; Building a controller keyboard!
+;; Need to build a key diagram....
+;; Author: Reed Williams rmwphd@gmail.com
 ;;
-;;
-
-;#NoTrayIcon
-
 
 #Persistent  ; Keep this script running until the user explicitly exits it.
  SetTimer, WatchPOV, 5
@@ -145,7 +143,7 @@ Return
 ;Joy8:: ; R2
 WatchLayer: 
     if GetKeyState("Joy8")
-    {
+    {           ;; If pressed, activate Layer 1 functionality!
         DpU = b
         DpD = w
         DpL = f
@@ -165,7 +163,7 @@ WatchLayer:
         R1 = .
     }
     else
-    {
+    {           ;; When released, restore normal Layer 0 operation
         DpU = s
         DpD = h
         DpL = t

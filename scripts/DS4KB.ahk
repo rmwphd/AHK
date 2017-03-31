@@ -142,8 +142,8 @@ Joy6::
     Send %R1%
 Return
 
-;Joy8::             ; R2
-WatchLayer: ; causes a crazy error where it presses return???
+;Joy8:: ; R2
+WatchLayer: 
     if GetKeyState("Joy8")
     {
         DpU = b

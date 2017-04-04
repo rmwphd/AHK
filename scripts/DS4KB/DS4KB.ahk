@@ -2,14 +2,20 @@
 ;; Need to build a key diagram....
 ;; Author: Reed Williams rmwphd@gmail.com
 ;;
+;; Letter frequency, English: etaoi nshrd lcumw fgypb vkjxqz 
+;; Letter frequency, alt:     etaon rishd lfcmu gypwb vkjxqz 
+;; Bigram frequency: th he an re er in on at nd st es en of te ed or ti hi as to 
+;; Trigram freq, crypto: the, and, tha, ent, ing, ion, tio, for
+;; 
 
 #Persistent  ; Keep this script running until the user explicitly exits it.
- SetTimer, WatchPOV, 5
- SetTimer, WatchAxis2, 5
- SetTimer, WatchAxis3, 5
- SetTimer, WatchLayer, 5
+ SetTimer, WatchPOV, 1
+ SetTimer, WatchAxis2, 1
+ SetTimer, WatchAxis3, 1
+ SetTimer, WatchLayer, 1
 return
 
+#include workmanesque.ahk
 
 ;; DPad Stuff ~~~~~~~~~~~~~~~~
 
@@ -116,18 +122,19 @@ return
 
 ; Joy5:: BackSpace
 Joy5::              ; L1
-Send {BackSpace down}   ; Press the button down.
-SetTimer, WaitForJoy5, 150  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
+SendInput {BackSpace down}   ; Press the button down.
+SendInput {BackSpace up}
+Sleep, 300
+SetTimer, WaitForJoy5, 50  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
 return
 
 WaitForJoy5:
 if not GetKeyState("Joy5")  ; The button has been released.
 {
-    Send {BackSpace up}  ; Release the key.
     SetTimer, WaitForJoy5, off  ; Stop monitoring the button.
     return
 }
-Send {BackSpace down}  ; Send another keystroke.
+SendInput {BackSpace down}  ; Send another keystroke.
 return
 
 Joy7::              ; L2
@@ -144,54 +151,22 @@ Return
 WatchLayer: 
     if GetKeyState("Joy8")
     {           ;; If pressed, activate Layer 1 functionality!
-        DpU = b
-        DpD = w
-        DpL = f
-        DpR = x
-        RSU = q
-        RSD = z
-;        RSL = 
-;        RSR = 
-        LSU = Up
-        LSD = Down
-        LSL = Left
-        LSR = Right
-        Squ = v
-        Exx = j
-        Cir = l
-        Tri = k
-        R1 = .
+        Gosub, layer1
     }
     else
     {           ;; When released, restore normal Layer 0 operation
-        DpU = s
-        DpD = h
-        DpL = t
-        DpR = a
-        RSU = u
-        RSD = y
-        RSL = m
-        RSR = p
-        LSU = g
-        LSD = d
-        LSL = r
-        LSR = c
-        Squ = e
-        Exx = o
-        Cir = n
-        Tri = i
-        R1 = {Space}
+        Gosub, layer0
     }
 
 Return
 
 ;; Rare face buttons ~~~~~~~~~~~~~~~~
 
-; Joy11::           ; L3
-;     ;;Send something
-; return
+Joy11::           ; L3
+    SendInput `,
+return
 Joy12::             ; R3
-    Send {Enter}
+    SendInput {Enter}
 return
 
 ; share::

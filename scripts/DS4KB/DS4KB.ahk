@@ -121,7 +121,9 @@ return
 ;; Shoulders ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ; Joy5:: BackSpace
-Joy5::              ; L1
+Joy5::Gosub bksp              ; L1
+
+bksp:
 SendInput {BackSpace down}   ; Press the button down.
 SendInput {BackSpace up}
 Sleep, 300

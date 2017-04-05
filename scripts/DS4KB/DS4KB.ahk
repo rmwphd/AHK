@@ -123,21 +123,21 @@ return
 ; Joy5:: BackSpace
 Joy5::Gosub bksp              ; L1
 
-bksp:
+bksp: ; prior behavior was annoyingly unpredictable
 SendInput {BackSpace down}   ; Press the button down.
 SendInput {BackSpace up}
-Sleep, 300
-SetTimer, WaitForJoy5, 50  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
+Sleep, 100
+; SetTimer, WaitForJoy5, 50  ; Reduce the number 30 to 20 or 10 to send keys faster. Increase it to send slower.
 return
 
-WaitForJoy5:
-if not GetKeyState("Joy5")  ; The button has been released.
-{
-    SetTimer, WaitForJoy5, off  ; Stop monitoring the button.
-    return
-}
-SendInput {BackSpace down}  ; Send another keystroke.
-return
+; WaitForJoy5:
+; if not GetKeyState("Joy5")  ; The button has been released.
+; {
+;     SetTimer, WaitForJoy5, off  ; Stop monitoring the button.
+;     return
+; }
+; SendInput {BackSpace down}  ; Send another keystroke.
+; return
 
 Joy7::              ; L2
   Send {Shift Down}

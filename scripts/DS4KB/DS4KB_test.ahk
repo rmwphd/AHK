@@ -2,8 +2,8 @@
 ;; Need to build a key diagram....
 ;; Author: Reed Williams rmwphd@gmail.com
 ;;
-;; Letter frequency, English: etaoi nshrd lcumw fgypb vkjxqz 
-;; Letter frequency, alt:     etaon rishd lfcmu gypwb vkjxqz 
+;; Letter frequency, English: etao insh rdlc umwf gypb vkjx qz 
+;; Letter frequency, alt:     etao nris hdlf cmug ypwb vkjx qz 
 ;; Bigram frequency: th he an re er in on at nd st es en of te ed or ti hi as to 
 ;; Trigram freq, crypto: the, and, tha, ent, ing, ion, tio, for
 ;; 

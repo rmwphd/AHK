@@ -7,6 +7,12 @@
 ;; i, j, k, l and perhaps others to enable 
 ;; functionality equivalent to the Poker 3 
 ;; 60% mech keyboard.
+;; 
+;; 4/24/2017: I have added word jumping and word
+;; selecting hotkeys to simulate functionality
+;; which I have built into the Scrapbooking
+;; layer of my Ergodox for when I'm using the 
+;; lappy keyboard itself.
 
 $*Capslock:: ; when capslock is pressed create an invisible window
 press :=  ; clear press variable
@@ -23,7 +29,6 @@ return
 
 #IfWinExist Capslock Is Down  ; enable the following hotkeys while invisible Capslock window exists
 
-
     i::
     Send {Up}
     press = true ; set press to true so that capslock is not toggled
@@ -31,17 +36,37 @@ return
 
     j::
     Send {Left}
-    press = true ; set press to true so that capslock is not toggled
+    press = true 
     return
 
     k::
     Send {Down}
-    press = true ; set press to true so that capslock is not toggled
+    press = true 
     return
 
     l::
     Send {Right}
-    press = true ; set press to true so that capslock is not toggled
+    press = true 
+    return
+
+    d::
+    Send ^{Left}
+    press = True
+    return
+
+    f::
+    Send ^{Right}
+    press = True
+    return
+
+    e::
+    Send ^+{Left}
+    press = True
+    return
+
+    r::
+    Send ^+{Right}
+    press = True
     return
 
 #IfWinExist

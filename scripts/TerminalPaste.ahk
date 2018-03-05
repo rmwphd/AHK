@@ -1,7 +1,12 @@
-;; Sending logically consistent copy & paste to git bash
+;; Sending logically consistent cut & paste to git bash and cmd
 
 #IfWinActive, ahk_class mintty
 {
      ^v::+Insert
-     ^c::^Insert
+     ^x::^Insert
+}
+
+#IfWinActive ahk_class ConsoleWindowClass
+{
+    ^v::SendInput , {Raw}%clipboard%
 }
